@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+      <title>The Movie DB App</title>
+        <script src="angular.min.js"></script>
+        <script src="config.js"></script>
+        <script src="searchCont.js"></script>
+      <script src="app.js"></script>
+    <meta charset="utf-8">
+    
+    
+   
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+   
+  </head>
+  <body >
+      
+            <nav class="navbar navbar-default">
+              <div class="container-fluid">
+              
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Movie Web App</a>
+                </div>
+
+                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Movies</a>
+                    </li>
+                    <li>
+                        <a href="shows.html">TV shows</a>
+                    </li>
+                    
+                  </ul>
+                
+                </div>
+              </div>
+            </nav>
+
+      <h1>The Movie DB App</h1>
+        
+      
+      
+    <div class="container">
+        
+        <div class="row">
+            <div class="jumotron" >
+                <div class="jumbotron">
+                   <div ng-controller="searchCtrl">            
+           
+                        <hr>            
+                        <div ng-hide="moviesLoaded||provjera">
+                            <input placeholder="Search..." ng-model="SearchMovies" ng-minlength="3" ng-change="getSearchMovies()">
+                            <hr>
+                            <div ng-init="getMovies()" style="display:table-row">
+                                    <div ng-repeat="movie in movies|limitTo: 10 " ng-click="getMoviesByClick(movie.original_title, movie.poster_path, movie.overview)" >                        
+                                        <img width="250px" height="250px"ng-src="{{SITE_PATH}}/{{movie.poster_path}}"/>
+                                        <div class="center-actor-text">{{movie.original_title}}</div>
+                                        <hr>
+                                    </div>
+                            </div>
+                        </div>
+
+
+
+                        <div ng-hide="!moviesLoaded||provjera">
+                            <input placeholder="Search..." ng-model="SearchMovies" ng-minlength="3" ng-change="getSearchMovies()">
+                            <hr>
+                            <div ng-repeat="m in movies" ng-click="getMoviesByClick(m.original_title, m.poster_path, m.overview)">
+
+                                <div id="center-actor-text">{{m.original_title}} </div>
+                                <img width="250px" height="250px"ng-src="{{SITE_PATH}}/{{m.poster_path}}"/>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div ng-hide="!provjera">
+                            <button class="nav-header" ng-click="doTheBack()">Back</button>                              
+                            <hr>                              
+                            <img width="250px" height="250px"ng-src="{{SITE_PATH}}/{{slika}}"/>
+                            <hr>
+                            <div class="center-actor-text">{{naslov}}</div>
+                            <hr>
+                            <div class="center-actor-text">{{opis}}</div>
+                            <hr>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <hr>
+        
+        <p class="text-center">Copyrights Denis Džafo</p>
+        
+    </div>
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>
